@@ -1,4 +1,4 @@
-package ru.job4j.model;
+package ru.job4j.dream.model;
 
 public class HumanResources {
 }
