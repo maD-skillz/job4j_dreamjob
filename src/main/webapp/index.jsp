@@ -30,11 +30,6 @@
             </tr>
             </thead>
             <tbody>
-            <% for (Post post : Store.instOf().findAll()) { %>
-            <tr>
-                <td><%= post.getName() %></td>
-            </tr>
-            <% } %>
             </tbody>
         </table>
     </div>
