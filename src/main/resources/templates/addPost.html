@@ -18,11 +18,17 @@
     <title>Работа мечты</title>
 </head>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/index">Dream job</a>
     <body>
     <div class="container">
         <div class="row">
+            <a class="navbar-brand" href="/index">Dream job</a>
             <a class="nav-item nav-link active" href="/index">Главная <span class="sr-only">(current)</span></a>
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link" th:href="@{/posts}">Вакансии</a>
+                    <a class="nav-item nav-link" th:href="@{/addPost}">Добавить вакансию</a>
+                    <a class="nav-item nav-link" th:href="@{/candidates}">Кандидаты</a>
+                    <a class="nav-item nav-link" th:href="@{/addCandidate}">Добавить кандидата</a>
+            </div>
             <div class="card" style="width: 100%">
                 <div class="card-header">
                     Добавить вакансию.
