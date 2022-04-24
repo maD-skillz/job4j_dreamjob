@@ -34,7 +34,24 @@ public class PostStore {
     public void add(Post post) {
         post.setId(ids.incrementAndGet());
         post.setCreated(LocalDateTime.now());
-        posts.put(post.getId(), post);
+        posts.putIfAbsent(post.getId(), post);
+    }
+
+    public Post findById(int id) {
+        for(Integer index : posts.keySet()) {
+            if (index.equals(id)) {
+                return posts.get(index);
+            }
+        }
+        return null;
+    }
+
+    public Post update(Post post) {
+      Post postToFind = findById(post.getId());
+      postToFind.setName(post.getName());
+      postToFind.setDescription(post.getDescription());
+      postToFind.setCreated(LocalDateTime.now());
+      return postToFind;
     }
 
 }
