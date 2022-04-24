@@ -38,20 +38,11 @@ public class PostStore {
     }
 
     public Post findById(int id) {
-        for(Integer index : posts.keySet()) {
-            if (index.equals(id)) {
-                return posts.get(index);
-            }
-        }
-        return null;
+        return posts.get(id);
     }
 
-    public Post update(Post post) {
-      Post postToFind = findById(post.getId());
-      postToFind.setName(post.getName());
-      postToFind.setDescription(post.getDescription());
-      postToFind.setCreated(LocalDateTime.now());
-      return postToFind;
+    public void update(Post post) {
+      posts.replace(post.getId(), post);
     }
 
 }
