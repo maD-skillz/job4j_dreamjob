@@ -34,7 +34,7 @@
           Новая вакансия.
         </div>
         <div class="card-body">
-          <form th:action="@{/createCandidate}" method="CANDIDATE">
+          <form th:action="@{/createCandidate}" method="POST">
             <input type="hidden" name="id" value="0"/>
             <div class="form-group">
               <label for="name">Название вакансии</label>
