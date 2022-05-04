@@ -18,6 +18,8 @@ public class Candidate implements Serializable {
 
     private boolean visible;
 
+    private byte[] photo;
+
     private Candidate() {
 
     }
@@ -68,6 +70,14 @@ public class Candidate implements Serializable {
 
     public void setCreated(LocalDateTime created) {
         this.created = created;
+    }
+
+    public byte[] getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 
     @Override
