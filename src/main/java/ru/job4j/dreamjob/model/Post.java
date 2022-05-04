@@ -14,6 +14,12 @@ public class Post implements Serializable {
 
     private LocalDateTime created;
 
+    private City city;
+
+    private Post() {
+
+    }
+
     private boolean visible;
 
     public Post(int id, String name, String description, LocalDateTime created) {
