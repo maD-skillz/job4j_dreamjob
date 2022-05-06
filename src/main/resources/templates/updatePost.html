@@ -44,6 +44,16 @@
                         <label for="description">Изменить описание вакансии</label>
                         <input type="text" class="form-control" name="description" id="description" th:field="*{description}">
                     </div>
+                    <div class="form-group">
+                        <label for="description">Изменить город вакансии</label>
+                        <select class="form-control" id="city.id" name="city.id">
+                            <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Изменить фото вакансии</label>
+                        <input type="file" class="form-control" name="file" id="file">
+                    </div>
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>

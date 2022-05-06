@@ -53,12 +53,15 @@
                 </span>
                 </td>
                 <td th:text="${post.description}"></td>
-                <td th:text="${post.created}"></td>
-            </tr>
-            </tbody>
-        </table>
+                        <a th:href="@{|/formUpdatePost/${post.id}|}">
+                    <td th:text="${post.city.name}"></td>
+                        </a>
+                    <td th:text="${post.created}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-</body>
+    </body>
 </nav>
 </html>
