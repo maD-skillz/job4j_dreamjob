@@ -34,26 +34,31 @@
                 Редатирование вакансии
             </div>
             <div class="card-body">
-                <form th:action="@{/updatePost}" method="POST" th:object="${post}">
+                <form th:action="@{/updatePost}" method="POST" th:object="${post}" enctype="multipart/form-data">
                     <input type="hidden" name="id" th:field="*{id}"/>
+
                     <div class="form-group">
                         <label for="name">Изменить название вакансии</label>
                         <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
                     </div>
+
                     <div class="form-group">
                         <label for="description">Изменить описание вакансии</label>
                         <input type="text" class="form-control" name="description" id="description" th:field="*{description}">
                     </div>
+
                     <div class="form-group">
                         <label for="description">Изменить город вакансии</label>
                         <select class="form-control" id="city.id" name="city.id">
                             <option th:each="city : ${cities}" th:value="${city.id}" th:text="${city.name}"></option>
                         </select>
                     </div>
+
                     <div class="form-group">
                         <label for="description">Изменить фото вакансии</label>
                         <input type="file" class="form-control" name="file" id="file">
                     </div>
+
                     <button type="submit" class="btn btn-primary">Сохранить</button>
                 </form>
             </div>

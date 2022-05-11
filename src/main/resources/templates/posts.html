@@ -39,7 +39,9 @@
             </thead>
             <tbody>
             <tr th:each="post: ${posts}">
+
                 <td th:text="${post.id}"></td>
+
                 <td>
                     <a th:href="@{|/formUpdatePost/${post.id}|}">
                         <i class="fa fa-edit"></i>
@@ -52,11 +54,13 @@
                     <i class="fa fa-square-o"></i>
                 </span>
                 </td>
+
                 <td th:text="${post.description}"></td>
-                        <a th:href="@{|/formUpdatePost/${post.id}|}">
-                    <td th:text="${post.city.name}"></td>
-                        </a>
-                    <td th:text="${post.created}"></td>
+
+                <td th:text="${post.city}"></td>
+
+                <td th:text="${post.created}"></td>
+
                 </tr>
                 </tbody>
             </table>

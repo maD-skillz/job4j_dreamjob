@@ -33,7 +33,7 @@
                     Редатирование кандидата
                 </div>
                 <div class="card-body">
-                    <form th:action="@{/updateCandidate}" method="POST" enctype="multipart/form-data" th:object="${candidate}">
+                    <form th:action="@{/updateCandidate}" method="POST" th:object="${candidate}" enctype="multipart/form-data">
                         <input type="hidden" name="id" th:field="*{id}"/>
                         <div class="form-group">
                             <label for="name">Изменить имя кандидата</label>
