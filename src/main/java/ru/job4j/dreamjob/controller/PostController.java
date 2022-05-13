@@ -1,12 +1,17 @@
 package ru.job4j.dreamjob.controller;
 
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
@@ -76,6 +81,16 @@ public class PostController {
     public String formUpdateCity(Model model, @PathVariable("cityId") int id) {
         model.addAttribute("city", cityService.findById(id));
         return "updatePost";
+    }
+
+    @GetMapping("/photoPost/{postId}")
+    public ResponseEntity<ByteArrayResource> download(@PathVariable("postId") Integer postId) {
+        Post post = postService.findPostById(postId);
+        return ResponseEntity.ok()
+                .headers(new HttpHeaders())
+                .contentLength(post.getPhoto().length)
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(new ByteArrayResource(post.getPhoto()));
     }
 
 }

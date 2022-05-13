@@ -46,6 +46,7 @@
                     <a th:href="@{|/formUpdatePost/${post.id}|}">
                         <i class="fa fa-edit"></i>
                     </a>
+                    <img th:width="150" th:high="150" th:src="@{|/photoPost/${post.id}|}">
                     <span th:text="${post.name}"></span>
                     <span th:if="${post.visible}">
                         <i class="fa fa-check-square-o"></i>
@@ -57,7 +58,7 @@
 
                 <td th:text="${post.description}"></td>
 
-                <td th:text="${post.city}"></td>
+                <td th:text="${post.city.name}"></td>
 
                 <td th:text="${post.created}"></td>
 
