@@ -7,15 +7,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 
 
@@ -56,7 +55,9 @@ public class PostController {
     }
 
     @PostMapping("/createPost")
-    public String createPost(@ModelAttribute Post post) {
+    public String createPost(@ModelAttribute Post post,
+                             @RequestParam("file") MultipartFile file) throws IOException {
+        post.setPhoto(file.getBytes());
         post.setCity(cityService.findById(post.getCity().getId()));
         post.setCreated(LocalDateTime.now());
         postService.addPost(post);
@@ -64,7 +65,9 @@ public class PostController {
     }
 
     @PostMapping("/updatePost")
-    public String updatePost(@ModelAttribute Post post) {
+    public String updatePost(@ModelAttribute Post post,
+                             @RequestParam("file") MultipartFile file) throws IOException {
+        post.setPhoto(file.getBytes());
         post.setCity(cityService.findById(post.getCity().getId()));
         post.setCreated(LocalDateTime.now());
         postService.updatePost(post);
