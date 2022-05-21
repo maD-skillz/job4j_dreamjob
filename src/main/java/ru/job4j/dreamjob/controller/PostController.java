@@ -77,12 +77,7 @@ public class PostController {
     @GetMapping("/formUpdatePost/{postId}")
     public String formUpdatePost(Model model, @PathVariable("postId") int id) {
         model.addAttribute("post", postService.findPostById(id));
-        return "updatePost";
-    }
-
-    @GetMapping("/formUpdateCity/{cityId}")
-    public String formUpdateCity(Model model, @PathVariable("cityId") int id) {
-        model.addAttribute("city", cityService.findById(id));
+        model.addAttribute("cities", cityService.getAllCities());
         return "updatePost";
     }
 
