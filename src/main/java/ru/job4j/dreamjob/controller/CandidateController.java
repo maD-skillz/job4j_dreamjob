@@ -43,7 +43,7 @@ public class CandidateController {
     @GetMapping("/candidates")
     public String candidates(Model model) {
         model.addAttribute("candidates", candidateService.findAll());
-        model.addAttribute("cities", cityService.getAllCities());
+        model.addAttribute("cities", candidateService.findAllCities());
         return "candidates";
     }
 
