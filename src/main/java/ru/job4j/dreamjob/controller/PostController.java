@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import ru.job4j.dreamjob.model.Candidate;
 import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.service.CityService;
 import ru.job4j.dreamjob.service.PostService;
@@ -45,11 +44,6 @@ public class PostController {
     @GetMapping("/posts")
     public String posts(Model model) {
         model.addAttribute("posts", postService.findAllPosts());
-        return "posts";
-    }
-
-    @GetMapping("/cities")
-    public String cities(Model model) {
         model.addAttribute("cities", postService.findAllCities());
         return "posts";
     }
