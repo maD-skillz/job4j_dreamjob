@@ -2,9 +2,7 @@ package ru.job4j.dreamjob.service;
 
 import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.Candidate;
-import ru.job4j.dreamjob.model.Post;
 import ru.job4j.dreamjob.store.CandidateDbStore;
-import ru.job4j.dreamjob.store.CandidateStore;
 
 import java.util.Collection;
 import java.util.List;
@@ -34,7 +32,7 @@ public class CandidateService {
     }
 
     public List<Candidate> findAllCities() {
-        List<Candidate> candidates = (List<Candidate>) candidateDbStore.findAll();
+        List<Candidate> candidates = candidateDbStore.findAll();
         candidates.forEach(
                 post -> post.setCity(
                         cityService.findById(post.getCity().getId())

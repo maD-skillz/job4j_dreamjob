@@ -3,19 +3,18 @@ package ru.job4j.dreamjob.model;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class City implements Serializable {
+public class User implements Serializable {
 
     private int id;
 
     private String name;
 
-    public City() {
+    private String email;
 
-    }
-
-    public City(int id, String name) {
+    public User(int id, String name, String email) {
         this.id = id;
         this.name = name;
+        this.email = email;
     }
 
     public int getId() {
@@ -34,20 +33,28 @@ public class City implements Serializable {
         this.name = name;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof City)) {
+        if (!(o instanceof User)) {
             return false;
         }
-        City city = (City) o;
-        return id == city.id && Objects.equals(name, city.name);
+        User user = (User) o;
+        return Objects.equals(name, user.name) && Objects.equals(email, user.email);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(name, email);
     }
 }
