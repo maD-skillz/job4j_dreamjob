@@ -27,4 +27,9 @@ public class UserService {
     public void updateUser(User user) {
         store.update(user);
     }
+
+    public Optional<User> findUserByEmailAndPwd(String email, String password) {
+        return email != null && password != null && email.contains("@") ?
+                Optional.of(store.findByEmailAndPwd(email, password)) : Optional.empty();
+    }
 }

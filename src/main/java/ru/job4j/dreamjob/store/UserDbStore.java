@@ -28,8 +28,8 @@ public class UserDbStore {
                 while (it.next()) {
                     users.add(new User(
                             it.getInt("id"),
-                            it.getString("name"),
-                            it.getString("email")));
+                            it.getString("email"),
+                            it.getString("password")));
                 }
             }
         } catch (Exception e) {
@@ -42,11 +42,11 @@ public class UserDbStore {
     public User add(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
-                     cn.prepareStatement("INSERT INTO users(name, email) VALUES (?, ?)",
+                     cn.prepareStatement("INSERT INTO users(email, password) VALUES (?, ?)",
                              PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getEmail());
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
             ps.setInt(3, user.getId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
@@ -63,16 +63,16 @@ public class UserDbStore {
     public void update(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
-                     cn.prepareStatement("UPDATE users SET name = ?, email = ? WHERE id = ?")
+                     cn.prepareStatement("UPDATE users SET email = ?, password = ? WHERE id = ?")
         ) {
-            ps.setString(1, user.getName());
-            ps.setString(2, user.getEmail());
+            ps.setString(1, user.getEmail());
+            ps.setString(2, user.getPassword());
             ps.setInt(3, user.getId());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
-                    user.setName(id.getString("name"));
                     user.setEmail(id.getString("email"));
+                    user.setPassword(id.getString("password"));
                 }
             }
         } catch (Exception e) {
@@ -89,8 +89,28 @@ public class UserDbStore {
                 if (it.next()) {
                     return new User(
                             it.getInt("id"),
-                            it.getString("name"),
-                            it.getString("email"));
+                            it.getString("email"),
+                            it.getString("password"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public User findByEmailAndPwd(String email, String password) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM users WHERE email = ?, password = ?")
+        ) {
+            ps.setString(1, email);
+            ps.setString(2, password);
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    return new User(
+                            it.getInt("id"),
+                            it.getString("email"),
+                            it.getString("password"));
                 }
             }
         } catch (Exception e) {
