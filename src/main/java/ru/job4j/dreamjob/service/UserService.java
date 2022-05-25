@@ -17,7 +17,7 @@ public class UserService {
     }
 
     public Optional<User> addUser(User user) {
-        return user != null ? Optional.of(store.add(user)) : Optional.empty();
+        return user != null ? store.add(user) : Optional.empty();
     }
 
     public Collection<User> findAllUsers() {
@@ -30,6 +30,6 @@ public class UserService {
 
     public Optional<User> findUserByEmailAndPwd(String email, String password) {
         return email != null && password != null && email.contains("@") ?
-                Optional.of(store.findByEmailAndPwd(email, password)) : Optional.empty();
+                store.findByEmailAndPwd(email, password) : Optional.empty();
     }
 }

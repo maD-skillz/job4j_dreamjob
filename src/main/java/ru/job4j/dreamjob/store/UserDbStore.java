@@ -9,6 +9,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 @Repository
 public class UserDbStore {
 
@@ -39,7 +41,7 @@ public class UserDbStore {
     }
 
 
-    public User add(User user) {
+    public Optional<User> add(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
                      cn.prepareStatement("INSERT INTO users(email, password) VALUES (?, ?)",
@@ -57,7 +59,7 @@ public class UserDbStore {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return user;
+        return Optional.empty();
     }
 
     public void update(User user) {
@@ -80,26 +82,26 @@ public class UserDbStore {
         }
     }
 
-    public User findById(int id) {
+    public Optional<User> findById(int id) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement("SELECT * FROM post WHERE id = ?")
         ) {
             ps.setInt(1, id);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new User(
+                    return Optional.of(new User(
                             it.getInt("id"),
                             it.getString("email"),
-                            it.getString("password"));
+                            it.getString("password")));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 
-    public User findByEmailAndPwd(String email, String password) {
+    public Optional<User> findByEmailAndPwd(String email, String password) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =  cn.prepareStatement("SELECT * FROM users WHERE email = ?, password = ?")
         ) {
@@ -107,15 +109,15 @@ public class UserDbStore {
             ps.setString(2, password);
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    return new User(
+                    return Optional.of(new User(
                             it.getInt("id"),
                             it.getString("email"),
-                            it.getString("password"));
+                            it.getString("password")));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return Optional.empty();
     }
 }
