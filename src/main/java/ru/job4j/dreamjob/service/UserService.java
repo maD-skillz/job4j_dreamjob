@@ -17,19 +17,10 @@ public class UserService {
     }
 
     public Optional<User> addUser(User user) {
-        return user != null ? store.add(user) : Optional.empty();
-    }
-
-    public Collection<User> findAllUsers() {
-        return store.findAll();
-    }
-
-    public void updateUser(User user) {
-        store.update(user);
+        return store.add(user);
     }
 
     public Optional<User> findUserByEmailAndPwd(String email, String password) {
-        return email != null && password != null && email.contains("@") ?
-                store.findByEmailAndPwd(email, password) : Optional.empty();
+        return store.findByEmailAndPwd(email, password);
     }
 }
