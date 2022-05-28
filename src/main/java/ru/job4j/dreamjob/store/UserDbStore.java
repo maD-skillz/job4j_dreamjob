@@ -57,9 +57,9 @@ public class UserDbStore {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           return Optional.empty();
         }
-        return Optional.empty();
+        return Optional.of(user);
     }
 
     public void update(User user) {
