@@ -30,6 +30,7 @@ public class UserDbStore {
                 while (it.next()) {
                     users.add(new User(
                             it.getInt("id"),
+                            it.getString("name"),
                             it.getString("email"),
                             it.getString("password")));
                 }
@@ -91,6 +92,7 @@ public class UserDbStore {
                 if (it.next()) {
                     return Optional.of(new User(
                             it.getInt("id"),
+                            it.getString("name"),
                             it.getString("email"),
                             it.getString("password")));
                 }
@@ -103,7 +105,7 @@ public class UserDbStore {
 
     public Optional<User> findByEmailAndPwd(String email, String password) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM users WHERE email = ?, password = ?")
+             PreparedStatement ps =  cn.prepareStatement("SELECT * FROM users WHERE email = ? AND password = ?")
         ) {
             ps.setString(1, email);
             ps.setString(2, password);
@@ -111,6 +113,7 @@ public class UserDbStore {
                 if (it.next()) {
                     return Optional.of(new User(
                             it.getInt("id"),
+                            it.getString("name"),
                             it.getString("email"),
                             it.getString("password")));
                 }

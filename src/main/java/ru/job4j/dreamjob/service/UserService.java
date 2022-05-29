@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.store.UserDbStore;
 
+import java.sql.SQLException;
 import java.util.*;
 
 @Service

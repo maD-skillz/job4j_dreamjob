@@ -7,6 +7,8 @@ public class User implements Serializable {
 
     private int id;
 
+    private String name;
+
     private String email;
 
     private String password;
@@ -14,6 +16,17 @@ public class User implements Serializable {
 
     public User(int id, String email, String password) {
         this.id = id;
+        this.email = email;
+        this.password = password;
+    }
+
+    public User() {
+
+    }
+
+    public User(int id, String name, String email, String password) {
+        this.id = id;
+        this.name = name;
         this.email = email;
         this.password = password;
     }
@@ -42,6 +55,14 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -51,12 +72,14 @@ public class User implements Serializable {
             return false;
         }
         User user = (User) o;
-        return id == user.id && Objects.equals(email, user.email)
+        return id == user.id
+                && Objects.equals(name, user.name)
+                && Objects.equals(email, user.email)
                 && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, email, password);
+        return Objects.hash(id, name, email, password);
     }
 }

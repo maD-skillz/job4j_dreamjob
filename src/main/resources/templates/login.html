@@ -20,11 +20,14 @@
 <body>
 <div class="container pt-3">
     <div class="row">
+        <a class="nav-item nav-link active" href="/index">Главная <span class="sr-only">(current)</span></a>
         <div class="card" style="width: 100%">
             <div class="card-header">
                 Авторизация
             </div>
+
             <div class="card-body">
+
                 <div th:if="${fail}" class="alert alert-danger" role="alert">
                     Логин или пароль введены неверно!
                 </div>
