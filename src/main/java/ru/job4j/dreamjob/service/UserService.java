@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import ru.job4j.dreamjob.model.User;
 import ru.job4j.dreamjob.store.UserDbStore;
 
-import java.sql.SQLException;
+
 import java.util.*;
 
 @Service
@@ -24,4 +24,9 @@ public class UserService {
     public Optional<User> findUserByEmailAndPwd(String email, String password) {
         return store.findByEmailAndPwd(email, password);
     }
+
+    public Collection<User> findAllUsers() {
+        return store.findAll();
+    }
+
 }

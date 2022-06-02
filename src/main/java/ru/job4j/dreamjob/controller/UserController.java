@@ -27,9 +27,44 @@ public class UserController {
         Optional<User> regUser = userService.addUser(user);
         if (regUser.isEmpty()) {
             model.addAttribute("message", "Пользователь с такой почтой уже существует");
-            return "redirect:/fail";
+            return "redirect:/users";
         }
-        return "redirect:/success";
+        return "redirect:/index";
+    }
+
+    @GetMapping("/addUser")
+    public String addUser(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
+        return "addUser";
+    }
+
+    @GetMapping("/formAddUser")
+    public String formAddUser(Model model) {
+        model.addAttribute("users", userService.findAllUsers());
+        return "addUser";
+    }
+
+    @GetMapping("/users")
+    public String users(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            user = new User();
+            user.setName("Гость");
+        }
+        model.addAttribute("user", user);
+        model.addAttribute("users", userService.findAllUsers());
+        return "users";
+    }
+
+    @PostMapping("/createUser")
+    public String createUser(@ModelAttribute User user) {
+        userService.addUser(user);
+        return "redirect:/loginPage";
     }
 
     @GetMapping("/loginPage")

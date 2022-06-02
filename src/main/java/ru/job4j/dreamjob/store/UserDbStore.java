@@ -45,12 +45,12 @@ public class UserDbStore {
     public Optional<User> add(User user) {
         try (Connection cn = pool.getConnection();
              PreparedStatement ps =
-                     cn.prepareStatement("INSERT INTO users(email, password) VALUES (?, ?)",
+                     cn.prepareStatement("INSERT INTO users (name, email, password) VALUES (?, ?, ?)",
                              PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
-            ps.setString(1, user.getEmail());
-            ps.setString(2, user.getPassword());
-            ps.setInt(3, user.getId());
+            ps.setString(1, user.getName());
+            ps.setString(2, user.getEmail());
+            ps.setString(3, user.getPassword());
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
