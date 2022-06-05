@@ -22,30 +22,24 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/registration")
-    public String registration(Model model, @ModelAttribute User user) {
-        Optional<User> regUser = userService.addUser(user);
-        if (regUser.isEmpty()) {
-            model.addAttribute("message", "Пользователь с такой почтой уже существует");
-            return "redirect:/users";
-        }
-        return "redirect:/index";
+
+    @GetMapping("/createUser")
+    public String createUser(Model model) {
+        model.addAttribute("users", userService.findAllUsers());
+        return "addUser";
     }
 
-    @GetMapping("/addUser")
-    public String addUser(Model model, HttpSession session) {
+    @GetMapping("/formAddUser")
+    public String formAddUser(Model model, @RequestParam(name = "fail", required = false)
+    Boolean fail, HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user == null) {
             user = new User();
             user.setName("Гость");
         }
         model.addAttribute("user", user);
-        return "addUser";
-    }
-
-    @GetMapping("/formAddUser")
-    public String formAddUser(Model model) {
         model.addAttribute("users", userService.findAllUsers());
+        model.addAttribute("fail", fail != null);
         return "addUser";
     }
 
